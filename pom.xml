@@ -19,6 +19,7 @@
         <module>GreedyModule</module>
         <module>DPModule</module>
         <module>SingleStackModule</module>
+        <module>GraphModule</module>
     </modules>
 
     <properties>
