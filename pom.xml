@@ -18,6 +18,7 @@
         <module>backtrackingModule</module>
         <module>GreedyModule</module>
         <module>DPModule</module>
+        <module>SingleStackModule</module>
     </modules>
 
     <properties>
