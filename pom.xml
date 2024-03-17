@@ -21,6 +21,7 @@
         <module>SingleStackModule</module>
         <module>GraphModule</module>
         <module>OtherModule</module>
+        <module>hot100</module>
     </modules>
 
     <properties>
