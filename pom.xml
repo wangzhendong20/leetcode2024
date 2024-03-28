@@ -22,9 +22,10 @@
         <module>GraphModule</module>
         <module>OtherModule</module>
         <module>hot100</module>
-        <module>BiShi</module>
+        <module>NiuKe</module>
         <module>Cover</module>
         <module>demoMianShi</module>
+        <module>demoBiShi</module>
     </modules>
 
     <properties>

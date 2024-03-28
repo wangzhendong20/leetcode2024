@@ -15,7 +15,7 @@ public class middle394 {
      * @param s
      * @return
      */
-    public static String decodeString(String s) {
+    public String decodeString(String s) {
         StringBuilder ans = new StringBuilder();
         Deque<String> stack = new LinkedList<>();
 
@@ -49,11 +49,5 @@ public class middle394 {
         }
 
         return String.valueOf(ans.reverse());
-    }
-
-    public static void main(String[] args) {
-        String s = "320[a]2[bc]";
-        System.out.println(decodeString(s));
-
     }
 }
