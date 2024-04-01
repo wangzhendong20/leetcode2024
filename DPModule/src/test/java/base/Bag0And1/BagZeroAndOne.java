@@ -1,5 +1,8 @@
 package base.Bag0And1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BagZeroAndOne {
 
     /**
@@ -32,7 +35,7 @@ public class BagZeroAndOne {
      * @param bagSize
      * @return
      */
-    public int Bag0And1Problem2(int[] weight, int[] value, int bagSize) {
+    public static int Bag0And1Problem2(int[] weight, int[] value, int bagSize) {
         int[] dp = new int[bagSize+1];
 
         for (int i = 0; i < weight.length; i++) {
@@ -42,5 +45,46 @@ public class BagZeroAndOne {
         }
 
         return dp[bagSize];
+    }
+
+
+    /**
+     * 具体方案
+     * @param weight
+     * @param value
+     * @param bagSize
+     * @return
+     */
+    public static int Bag0And1Problem2Plus(int[] weight, int[] value, int bagSize) {
+        int[] dp = new int[bagSize+1];
+
+        for (int i = 0; i < weight.length; i++) {
+            for (int j = bagSize; j >= weight[i]; j--) {
+                dp[j] = Math.max(dp[j], dp[j-weight[i]] + value[i]);
+            }
+        }
+
+        // 回溯求解具体方案
+        List<Integer> solution = new ArrayList<>();
+        int remainingCapacity = bagSize;
+        for (int i = weight.length - 1; i >= 0; i--) {
+            if (remainingCapacity >= weight[i] && dp[remainingCapacity] == dp[remainingCapacity - weight[i]] + value[i]) {
+                solution.add(0,(i + 1));
+                remainingCapacity -= weight[i];
+            }
+        }
+        for (int i = 0; i < solution.size(); i++) {
+            System.out.print(solution.get(i) + " ");
+        }
+
+        return dp[bagSize];
+    }
+
+    public static void main(String[] args) {
+        int[] weights = {2, 3, 4, 5};
+        int[] values = {3, 4, 5, 6};
+        int capacity = 5;
+        int max_value = Bag0And1Problem2(weights, values, capacity);
+        System.out.println("背包能装的最大价值为：" + max_value);
     }
 }
