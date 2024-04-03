@@ -80,7 +80,6 @@ public class middle210 {
         for (int i = 0; i < numCourses; i++) {
             if (indegree[i] == 0) {
                 q.offer(i);
-
             }
         }
 
@@ -95,7 +94,6 @@ public class middle210 {
             res[count] = cur;
             count++;
             for (int next : graph[cur]) {
-
                 indegree[next]--;
                 if (indegree[next] == 0) {
                     q.offer(next);

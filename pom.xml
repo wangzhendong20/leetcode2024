@@ -26,6 +26,7 @@
         <module>Cover</module>
         <module>demoMianShi</module>
         <module>demoBiShi</module>
+        <module>Hot100Plus</module>
     </modules>
 
     <properties>
