@@ -27,6 +27,7 @@
         <module>demoMianShi</module>
         <module>demoBiShi</module>
         <module>Hot100Plus</module>
+        <module>lcZhouSai</module>
     </modules>
 
     <properties>
