@@ -5,12 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.dong</groupId>
-        <artifactId>leetcode2024</artifactId>
+        <artifactId>daiMaCodeModule</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.zhendonger</groupId>
-    <artifactId>DPModule</artifactId>
+    <artifactId>SingleStackModule</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

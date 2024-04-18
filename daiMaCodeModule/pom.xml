@@ -9,7 +9,24 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>hot100</artifactId>
+    <artifactId>daiMaCodeModule</artifactId>
+
+    <modules>
+        <module>ArrayModule</module>
+        <module>LinkListModule</module>
+        <module>HashModule</module>
+        <module>StringModule</module>
+        <module>StackAndQueueModule</module>
+        <module>TreeModule</module>
+        <module>backtrackingModule</module>
+        <module>GreedyModule</module>
+        <module>DPModule</module>
+        <module>SingleStackModule</module>
+        <module>GraphModule</module>
+        <module>OtherModule</module>
+        <module>hot100</module>
+        <module>Cover</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
