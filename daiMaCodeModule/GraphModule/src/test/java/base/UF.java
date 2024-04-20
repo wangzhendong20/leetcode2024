@@ -1,15 +1,19 @@
 package base;
 
-public class BingChaJi {
-    public int n = 1005; // n根据题目中节点数量而定，一般比节点数量大一点就好
-    public int[] father = new int[n];   // 父节点数组
+public class UF {
 
-    // 并查集初始化
-    public void init() {
+    private int count;  // 连通分量个数
+    public int[] father; // 父节点数组
+
+    // 构造函数，初始化父节点数组
+    public UF(int n) {
+        this.count = n;
+        father = new int[n];
         for (int i = 0; i < n; ++i) {
             father[i] = i;
         }
     }
+
     // 并查集里寻根的过程
     public int find(int u) {
         if (u == father[u]) return u;
@@ -28,7 +32,13 @@ public class BingChaJi {
     public void join(int u, int v) {
         u = find(u); // 寻找u的根
         v = find(v); // 寻找v的根
-        if (u == v) return ; // 如果发现根相同，则说明在一个集合，不用两个节点相连直接返回
+        if (u == v) return; // 如果发现根相同，则说明在一个集合，不用两个节点相连直接返回
         father[v] = u;
+        count--;  // 两个连通分量合并成一个连通分量
+    }
+
+    // 返回图中的连通分量个数
+    public int count() {
+        return count;
     }
 }
