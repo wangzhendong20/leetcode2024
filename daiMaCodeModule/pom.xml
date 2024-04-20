@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>daiMaCodeModule</artifactId>
+    <packaging>pom</packaging>
 
     <modules>
         <module>ArrayModule</module>
