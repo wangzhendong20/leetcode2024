@@ -4525,6 +4525,26 @@ public int largestRectangleArea(int[] heights) {
 
 ## 10.1 做题总结与技巧
 
+### 邻接表法建图
+
+#### 无权图
+
+```
+List<Integer>[] graph = new LinkedList[V];
+for (int i = 0; i < V; i++) {
+    graph[i] = new LinkedList<>();
+}
+```
+
+#### 有权图
+
+```
+List<int[]>[] graph = new LinkedList[V];
+for (int i = 0; i < numCourses; i++) {
+    graph[i] = new LinkedList<>();
+}
+```
+
 ## 10.1.1   深搜三部曲（与回溯中的递归三部曲类似）
 
 #### 确认递归函数，参数
