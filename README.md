@@ -1,5 +1,6 @@
 # 目录
 ## daiMaCodeModule
+代码随想录全部内容
 ### ArrayModule
 代码随想录数组部分
 ### backtrackingModule
@@ -40,3 +41,5 @@ leetcode Hot100纯享版
 牛客练习
 ## leetcode2024.md
 刷题笔记，大多参考代码随想录
+## MultiThreadModule
+一些常见的多线程问题
