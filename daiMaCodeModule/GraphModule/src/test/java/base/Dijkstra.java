@@ -7,17 +7,17 @@ import java.util.PriorityQueue;
 public class Dijkstra {
     /**
      * Dijkstra 算法
-     * 根据labuladong修改，可能存在错误
+     * 根据labuladong修改
      */
 
 
     class State {
         // 图节点的 id
-        int id;
+        private int id;
         // 从 start 节点到当前节点的距离
-        int distFromStart;
+        private int distFromStart;
 
-        State(int id, int distFromStart) {
+        public State(int id, int distFromStart) {
             this.id = id;
             this.distFromStart = distFromStart;
         }
@@ -54,10 +54,10 @@ public class Dijkstra {
             }
             // 将 curNode 的相邻节点装入队列
             for (int[] edge : graph[curNodeID]) {
-                int nextNodeID = edge[0];
-                int weight = edge[1];
+                int nextNodeID = edge[1];
+                int weight = edge[2];
                 // 看看从 curNode 达到 nextNode 的距离是否会更短
-                int distToNextNode = distTo[curNodeID] + weight;  //weight(curNodeID, nextNodeID);
+                int distToNextNode = distTo[curNodeID] + weight;
                 if (distTo[nextNodeID] > distToNextNode) {
                     // 更新 dp table
                     distTo[nextNodeID] = distToNextNode;

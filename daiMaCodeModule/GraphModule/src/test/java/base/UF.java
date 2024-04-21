@@ -3,7 +3,7 @@ package base;
 public class UF {
 
     private int count;  // 连通分量个数
-    public int[] father; // 父节点数组
+    private int[] father; // 父节点数组
 
     // 构造函数，初始化父节点数组
     public UF(int n) {

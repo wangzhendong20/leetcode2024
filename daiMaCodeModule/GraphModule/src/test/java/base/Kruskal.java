@@ -31,7 +31,7 @@ public class Kruskal {
 
     class UF {
         private int count;  // 连通分量个数
-        public int[] father;
+        private int[] father;
 
         public UF(int n) {
             this.count = n;
