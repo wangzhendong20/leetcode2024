@@ -1,11 +1,9 @@
-package middle;
-
-import utils.ListNode;
 import utils.TreeNode;
 
 import java.util.HashMap;
 
 public class middle230 {
+
     int len = 0;
     int ans = -1;
     public int kthSmallest(TreeNode root, int k) {
@@ -26,7 +24,6 @@ public class middle230 {
 
         traversal(root.right,k);
     }
-
 
     public int kthSmallest2(TreeNode root, int k) {
         MyBst bst = new MyBst(root);
