@@ -8,9 +8,11 @@ public class middle55 {
     public boolean canJump(int[] nums) {
         if (nums.length == 1) return true;
         if (nums[0] == 0) return false;
+        int cover = 0;
 
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (nums[i] >= nums.length - i - 1) {
+        for (int i = 0; i <= cover; i++) {
+            cover = Math.max(cover, i+ nums[i]);
+            if (cover >= nums.length - 1) {
                 return true;
             }
         }
