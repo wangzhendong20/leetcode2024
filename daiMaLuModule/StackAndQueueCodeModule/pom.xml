@@ -3,21 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.dong</groupId>
+        <artifactId>daiMaLuModule</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
-    <groupId>org.dong</groupId>
-    <artifactId>leetcode2024</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>NiuKe</module>
-        <module>demoMianShi</module>
-        <module>demoBiShi</module>
-        <module>Hot100Plus</module>
-        <module>lcZhouSai</module>
-        <module>daiMaCodeModule</module>
-        <module>MultiThreadModule</module>
-        <module>daiMaLuModule</module>
-    </modules>
+    <artifactId>StackAndQueueCodeModule</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
