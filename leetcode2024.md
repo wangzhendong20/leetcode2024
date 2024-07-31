@@ -1144,7 +1144,7 @@ public int[] topKFrequent(int[] nums, int k) {
 1. **确定递归函数的参数和返回值**：因为要打印出前序遍历节点的数值，所以参数里需要传入vector来放节点的数值，除了这一点就不需要再处理什么数据了也不需要有返回值，所以递归函数返回类型就是void，代码如下：
 
 ```java
-void traversal(TreeNode* cur, List<Integer> list)
+void traversal(utils.TreeNode* cur, List<Integer> list)
 ```
 
 2. **确定终止条件**：在递归的过程中，如何算是递归结束了呢，当然是当前遍历的节点是空了，那么本层递归就要结束了，所以如果当前遍历的这个节点是空，就直接return，代码如下：
@@ -1164,7 +1164,7 @@ traversal(cur->right, vec); // 右
 完整代码：
 
 ```java
-private void preorder(TreeNode cur, List<Integer> result) {
+private void preorder(utils.TreeNode cur, List<Integer> result) {
     if (cur == null) {
         return;
     }
@@ -1178,7 +1178,7 @@ private void preorder(TreeNode cur, List<Integer> result) {
 #### 中序遍历
 
 ```java
-private void inorder(TreeNode cur, List<Integer> result) {
+private void inorder(utils.TreeNode cur, List<Integer> result) {
     if (cur == null) {
         return;
     }
@@ -1192,7 +1192,7 @@ private void inorder(TreeNode cur, List<Integer> result) {
 #### 后序遍历
 
 ```java
-private void postorder(TreeNode cur, List<Integer> result) {
+private void postorder(utils.TreeNode cur, List<Integer> result) {
     if (cur == null) {
         return;
     }
@@ -1212,15 +1212,15 @@ private void postorder(TreeNode cur, List<Integer> result) {
 为什么要先加入 右孩子，再加入左孩子呢？ 因为这样出栈的时候才是中左右的顺序。
 
 ```java
-public List<Integer> preorderTraversal(TreeNode root) {
+public List<Integer> preorderTraversal(utils.TreeNode root) {
     List<Integer> result = new ArrayList<Integer>();
 
-    Deque<TreeNode> stack = new LinkedList<>();
+    Deque<utils.TreeNode> stack = new LinkedList<>();
 
     if (root == null) return result;
     stack.push(root);
     while (!stack.isEmpty()) {
-        TreeNode node = stack.pop();
+        utils.TreeNode node = stack.pop();
         result.add(node.val);
         if (node.right != null) stack.push(node.right);
         if (node.left != null) stack.push(node.left);
@@ -1236,15 +1236,15 @@ public List<Integer> preorderTraversal(TreeNode root) {
 ![](D:\Code\JavaProject\leetcode2024\leetcode2024.assets\Snipaste_2024-03-09_10-21-56.png)
 
 ```java
-public List<Integer> postorderTraversal(TreeNode root) {
+public List<Integer> postorderTraversal(utils.TreeNode root) {
     List<Integer> result = new ArrayList<Integer>();
-    Deque<TreeNode> stack = new LinkedList<>();
+    Deque<utils.TreeNode> stack = new LinkedList<>();
     
     if (root == null) return result;
     stack.push(root);
     
     while (!stack.isEmpty()) {
-        TreeNode node = stack.pop();
+        utils.TreeNode node = stack.pop();
         result.add(node.val);
         if (node.left != null) stack.push(node.left);
         if (node.right != null) stack.push(node.right);
@@ -1260,12 +1260,12 @@ public List<Integer> postorderTraversal(TreeNode root) {
 **需要借用指针的遍历来帮助访问节点，栈则用来处理节点上的元素。**
 
 ```java
-public List<Integer> inorderTraversal(TreeNode root) {
+public List<Integer> inorderTraversal(utils.TreeNode root) {
     List<Integer> result = new ArrayList<Integer>();
-    Deque<TreeNode> stack = new LinkedList<>();
+    Deque<utils.TreeNode> stack = new LinkedList<>();
 
     if (root == null) return result;
-    TreeNode cur = root;
+    utils.TreeNode cur = root;
 
     while (cur != null || !stack.isEmpty()) {
         if (cur != null) {
@@ -1292,15 +1292,15 @@ public List<Integer> inorderTraversal(TreeNode root) {
 如何标记呢，**就是要处理的节点放入栈之后，紧接着放入一个空指针作为标记。** 这种方法也可以叫做标记法。
 
 ```java
-public List<Integer> preorderTraversal(TreeNode root) {
+public List<Integer> preorderTraversal(utils.TreeNode root) {
     List<Integer> result = new ArrayList<Integer>();
-    Deque<TreeNode> stack = new LinkedList<>();
+    Deque<utils.TreeNode> stack = new LinkedList<>();
 
     if (root == null) return result;
     stack.push(root);
 
     while (!stack.isEmpty()) {
-        TreeNode node = stack.pop();
+        utils.TreeNode node = stack.pop();
         if (node != null) {
             if (node.right != null) stack.push(node.right);
             if (node.left != null) stack.push(node.left);
@@ -1314,15 +1314,15 @@ public List<Integer> preorderTraversal(TreeNode root) {
     return result;
 }
 
-public List<Integer> inorderTraversal(TreeNode root) {
+public List<Integer> inorderTraversal(utils.TreeNode root) {
     List<Integer> result = new ArrayList<Integer>();
-    Deque<TreeNode> stack = new LinkedList<>();
+    Deque<utils.TreeNode> stack = new LinkedList<>();
 
     if (root == null) return result;
     stack.push(root);
 
     while (!stack.isEmpty()) {
-        TreeNode node = stack.pop();
+        utils.TreeNode node = stack.pop();
         if (node != null) {
             if (node.right != null) stack.push(node.right);
             stack.push(node);
@@ -1336,15 +1336,15 @@ public List<Integer> inorderTraversal(TreeNode root) {
     return result;
 }
 
-public List<Integer> postorderTraversal(TreeNode root) {
+public List<Integer> postorderTraversal(utils.TreeNode root) {
     List<Integer> result = new ArrayList<Integer>();
-    Deque<TreeNode> stack = new LinkedList<>();
+    Deque<utils.TreeNode> stack = new LinkedList<>();
 
     if (root == null) return result;
     stack.push(root);
 
     while (!stack.isEmpty()) {
-        TreeNode node = stack.pop();
+        utils.TreeNode node = stack.pop();
         if (node != null) {
             stack.push(node);
             stack.push(null);
@@ -1362,8 +1362,8 @@ public List<Integer> postorderTraversal(TreeNode root) {
 ### 层次遍历
 
 ```java
-public List<List<Integer>> levelOrder(TreeNode root) {
-    Deque<TreeNode> deque = new LinkedList<>();
+public List<List<Integer>> levelOrder(utils.TreeNode root) {
+    Deque<utils.TreeNode> deque = new LinkedList<>();
     List<List<Integer>> res = new ArrayList<>();
     if (root == null) return res;
 
@@ -1373,7 +1373,7 @@ public List<List<Integer>> levelOrder(TreeNode root) {
         int size = deque.size();
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            TreeNode node = deque.poll();
+            utils.TreeNode node = deque.poll();
             list.add(node.val);
             if (node.left != null) deque.offer(node.left);
             if (node.right != null) deque.offer(node.right);
@@ -1426,8 +1426,8 @@ left与right的逻辑处理;         // 中
 ### 在递归遍历的过程中如何记录前后两个指针[24. 二叉搜索树的最小绝对差](https://programmercarl.com/0530.二叉搜索树的最小绝对差.html)
 
 ```java
-TreeNode pre = null;
-private void traversal(TreeNode cur) {
+utils.TreeNode pre = null;
+private void traversal(utils.TreeNode cur) {
     if (cur == null) return;
 
     traversal(cur.left);
@@ -1457,12 +1457,12 @@ private void traversal(TreeNode cur) {
 
 ```java
 //递归法
-public boolean isSymmetric(TreeNode root) {
+public boolean isSymmetric(utils.TreeNode root) {
     if (root == null) return true;
     return compare(root.left,root.right);
 }
 
-private boolean compare(TreeNode left, TreeNode right) {
+private boolean compare(utils.TreeNode left, utils.TreeNode right) {
 
     if ((left == null && right != null) || (left != null && right == null)) return false;
     else if (left == null && right == null) return true;
@@ -1473,14 +1473,14 @@ private boolean compare(TreeNode left, TreeNode right) {
     return isSame;
 }
 //迭代法
-public boolean isSymmetric2(TreeNode root) {
+public boolean isSymmetric2(utils.TreeNode root) {
         if (root == null) return true;
-        Queue<TreeNode> deque = new LinkedList<>();
+        Queue<utils.TreeNode> deque = new LinkedList<>();
         deque.offer(root.left);
         deque.offer(root.right);
         while (!deque.isEmpty()) {
-            TreeNode leftNode = deque.poll();
-            TreeNode rightNode = deque.poll();
+            utils.TreeNode leftNode = deque.poll();
+            utils.TreeNode rightNode = deque.poll();
             if (leftNode == null && rightNode == null) {
                 continue;
             }
@@ -1504,11 +1504,11 @@ public boolean isSymmetric2(TreeNode root) {
 返回-1表示高度差大于1
 
 ```java
-public boolean isBalanced(TreeNode root) {
+public boolean isBalanced(utils.TreeNode root) {
     return getHeight(root) == -1 ? false : true;
 }
 
-private int getHeight(TreeNode cur) {
+private int getHeight(utils.TreeNode cur) {
     if (cur == null) return 0;
     int leftHeight = getHeight(cur.left);
     if (leftHeight == -1) return -1;
@@ -1530,7 +1530,7 @@ private int getHeight(TreeNode cur) {
 
 采用前序遍历
 
-1. **函数所需参数**：`TreeNode cur, List<Integer> path, List<String> res`
+1. **函数所需参数**：`utils.TreeNode cur, List<Integer> path, List<String> res`
 
 2. **终止条件**：遇到叶子结点
 
@@ -1561,7 +1561,7 @@ if (cur.right != null) {
 
 
 ```java
-public List<String> binaryTreePaths(TreeNode root) {
+public List<String> binaryTreePaths(utils.TreeNode root) {
     List<Integer> path = new ArrayList<>();
     List<String> res = new ArrayList<>();
     if (root == null) return res;
@@ -1569,7 +1569,7 @@ public List<String> binaryTreePaths(TreeNode root) {
     return res;
 }
 
-private void traversal(TreeNode cur, List<Integer> path, List<String> res) {
+private void traversal(utils.TreeNode cur, List<Integer> path, List<String> res) {
     path.add(cur.val);
 
     if (cur.left == null && cur.right == null) {
@@ -1607,7 +1607,7 @@ if (node->left != NULL && node->left->left == NULL && node->left->right == NULL)
 **递归的遍历顺序为后序遍历（左右中），是因为要通过递归函数的返回值来累加求取左叶子数值之和。**
 
 ```java
-public int sumOfLeftLeaves(TreeNode root) {
+public int sumOfLeftLeaves(utils.TreeNode root) {
     if (root == null) return 0;
 
     int leftSum = sumOfLeftLeaves(root.left);
@@ -1630,10 +1630,10 @@ public int sumOfLeftLeaves(TreeNode root) {
 3. 要理解如果返回值left为空，right不为空为什么要返回right，为什么可以用返回right传给上一层结果。
 
 ```java
-public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+public utils.TreeNode lowestCommonAncestor(utils.TreeNode root, utils.TreeNode p, utils.TreeNode q) {
     if (root == p || root == q || root == null) return root;
-    TreeNode left = lowestCommonAncestor(root.left,p,q);
-    TreeNode right = lowestCommonAncestor(root.right,p,q);
+    utils.TreeNode left = lowestCommonAncestor(root.left,p,q);
+    utils.TreeNode right = lowestCommonAncestor(root.right,p,q);
 
     if (left != null && right != null) return root;
 
@@ -1657,17 +1657,17 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
  * @param q
  * @return
  */
-public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+public utils.TreeNode lowestCommonAncestor(utils.TreeNode root, utils.TreeNode p, utils.TreeNode q) {
     if (root == null) return root;
     if (root.val < p.val && root.val < q.val) {
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        utils.TreeNode right = lowestCommonAncestor(root.right, p, q);
         if (right != null) {
             return right;
         }
     }
 
     if (root.val > p.val && root.val > q.val) {
-        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        utils.TreeNode left = lowestCommonAncestor(root.left, p, q);
         if (left != null) {
             return left;
         }
@@ -1684,7 +1684,7 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
  * @param q
  * @return
  */
-public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+public utils.TreeNode lowestCommonAncestor2(utils.TreeNode root, utils.TreeNode p, utils.TreeNode q) {
     while (true) {
         if (root.val > p.val && root.val > q.val) {
             root = root.left;
@@ -1712,7 +1712,7 @@ public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
   - 第五种情况：左右孩子节点都不为空，则将删除节点的左子树头结点（左孩子）放到删除节点的右子树的最左面节点的左孩子上，返回删除节点右孩子为新的根节点。
 
 ```java
-public TreeNode deleteNode(TreeNode root, int key) {
+public utils.TreeNode deleteNode(utils.TreeNode root, int key) {
     if (root == null) return root;
 
     if (root.val == key) {
@@ -1720,7 +1720,7 @@ public TreeNode deleteNode(TreeNode root, int key) {
         else if (root.left != null && root.right == null) return root.left;
         else if (root.left == null && root.right != null) return root.right;
         else {
-            TreeNode node = root.right;
+            utils.TreeNode node = root.right;
             while (node.left != null) {
                 node = node.left;
             }
@@ -1745,16 +1745,16 @@ public TreeNode deleteNode(TreeNode root, int key) {
 ### [31. 修剪二叉搜索树](https://programmercarl.com/0669.修剪二叉搜索树.html)
 
 ```java
-public TreeNode trimBST(TreeNode root, int low, int high) {
+public utils.TreeNode trimBST(utils.TreeNode root, int low, int high) {
     if (root == null) return null;
 
     if (root.val < low) {
-        TreeNode right = trimBST(root.right, low, high);
+        utils.TreeNode right = trimBST(root.right, low, high);
         return right;
     }
 
     if (root.val > high) {
-        TreeNode left = trimBST(root.left, low, high);
+        utils.TreeNode left = trimBST(root.left, low, high);
         return left;
     }
 
@@ -2985,7 +2985,7 @@ private int robRange(int[] nums, int left, int right) {
 参数为当前节点，代码如下：
 
 ```java
-int[] robTree(TreeNode cur) {
+int[] robTree(utils.TreeNode cur) {
 ```
 
 其实这里的返回数组就是dp数组。
@@ -3044,13 +3044,13 @@ return new int[]{val2, val1};
 **最后头结点就是 取下标0 和 下标1的最大值就是偷得的最大金钱**。
 
 ```java
-public int rob(TreeNode root) {
+public int rob(utils.TreeNode root) {
     if (root == null) return 0;
     int[] tree = robTree(root);
     return Math.max(tree[0], tree[1]);
 }
 
-private int[] robTree(TreeNode root) {
+private int[] robTree(utils.TreeNode root) {
     if (root == null) return new int[]{0,0};
 
     int[] left = robTree(root.left);
@@ -4843,6 +4843,78 @@ private void join(int u, int v) {
 
 ## 10.1.4  DFS/BFS有向图有环问题   拓扑排序
 
+### 拓扑排序的过程
+
+1. 找到入度为0 的节点，加入结果集
+2. 将该节点从图中移除
+
+循环以上两步，直到 所有节点都在图中被移除了。
+
+### 判断是否有环
+
+如果我们发现结果集元素个数 不等于 图中节点个数，我们就可以认定图中一定有 有向环！
+
+```java
+package base;
+
+import java.util.*;
+
+public class TuoPu {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+
+        List<List<Integer>> map = new ArrayList<List<Integer>>(); //记录依赖关系
+        int[] indegree = new int[n]; //记录每个节点的入度
+
+        for (int i = 0; i < n; i++) {
+            map.add(new ArrayList<Integer>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            int from = scanner.nextInt();
+            int to = scanner.nextInt();
+            map.get(from).add(to); // 记录指向哪些节点
+            indegree[to]++; // to的入度加一
+        }
+
+        Deque<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            if (indegree[i] == 0) { // 入度为0的文件，可以作为开头，先加入队列
+                queue.offer(i);
+            }
+        }
+
+        List<Integer> result = new ArrayList<>();
+
+        // 拓扑排序
+        while (!queue.isEmpty()) {
+            int cur = queue.poll();// 当前选中的节点
+            result.add(cur);
+            for (Integer node : map.get(cur)) {
+                indegree[node]--; // cur的指向的节点入度-1
+                if (indegree[node] == 0) {
+                    queue.offer(node);
+                }
+            }
+        }
+
+        if (result.size() == n) {
+            for (int i = 0; i < result.size(); i++) {
+                System.out.println(result.get(i));
+                if (i < result.size() - 1) {
+                    System.out.println(" ");
+                }
+            }
+        } else {
+            System.out.println(-1);
+        }
+
+    }
+}
+```
+
 ### 经典题：[207. 课程表](https://leetcode.cn/problems/course-schedule/)
 
 #### DFS判断是否有环
@@ -5077,6 +5149,78 @@ public int[] findOrderBFS(int numCourses, int[][] prerequisites) {
 
 ### Pirm算法模板
 
+**用minDist数组来记录每次的最近边**
+
+```java
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class KM53 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int V = sc.nextInt();
+        int E = sc.nextInt();
+        int[][] graph = new int[V+1][V+1];
+        for (int i = 0; i <= V; i++) {
+            Arrays.fill(graph[i], 10001);
+        }
+        for (int i = 0; i < E; i++) {
+            int from  = sc.nextInt();
+            int to   = sc.nextInt();
+            int k = sc.nextInt();
+            graph[from][to] = k;
+            graph[to][from] = k;
+        }
+
+        //记录最小生成树
+        int[] parent = new int[V+1];
+        Arrays.fill(parent, -1);
+
+        int[] minDist = new int[V+1];
+        Arrays.fill(minDist,10001);
+        boolean[] visited = new boolean[V+1];
+
+        for (int i = 1; i < V; i++) {
+            // 1、prim三部曲，第一步：选距离生成树最近节点
+            int cur = -1;
+            int minVal = Integer.MAX_VALUE;
+            for (int j = 1; j <= V; j++) {
+                if (!visited[j] && minDist[j] < minVal) {
+                    minVal = minDist[j];
+                    cur = j;
+                }
+            }
+            // 2、prim三部曲，第二步：最近节点（cur）加入生成树
+            visited[cur] = true;
+
+            // 3、prim三部曲，第三步：更新非生成树节点到生成树的距离（即更新minDist数组）
+            for (int j = 1; j <= V; j++) {
+                if (!visited[j] && graph[cur][j] < minDist[j]) {
+                    minDist[j] = graph[cur][j];
+
+                    parent[j] = cur; // 记录最小生成树的边 （注意数组指向的顺序很重要）
+                }
+            }
+        }
+
+        int res = 0;
+        for (int i = 2; i <= V; i++) {
+            res += minDist[i];
+        }
+
+        // 输出 最小生成树边的链接情况
+        for (int i = 1; i <= V; i++) {
+            System.out.println(i + "->" + parent[i]);
+        }
+
+        System.out.println(res);
+    }
+}
+
+```
+
+**用堆来记录最近边**
+
 ```java
 class Prim {
     // 核心数据结构，存储「横切边」的优先级队列
@@ -5156,6 +5300,96 @@ class Prim {
 ### Kruskal算法模板
 
 ```java
+package base;
+
+import java.util.*;
+
+public class Kruskal {
+    static class Edge {
+        int src, dest, weight;
+
+        public Edge(int src, int dest, int weight) {
+            this.src = src;
+            this.dest = dest;
+            this.weight = weight;
+        }
+    }
+
+    static class UF {
+        int[] parent;
+
+        public UF(int n) {
+            parent = new int[n+1];
+            for (int i = 0; i <= n; i++) {
+                parent[i] = i;
+            }
+        }
+
+        public int find(int u) {
+            if (u == parent[u]) return u;
+            else return parent[u] = find(parent[u]);
+        }
+
+        public void join(int u, int v) {
+            u = find(u);
+            v = find(v);
+            if (u == v) return;
+            parent[v] = u;
+        }
+
+        public boolean isSame(int u, int v) {
+            u = find(u);
+            v = find(v);
+            return u == v;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int V = sc.nextInt();
+        int E = sc.nextInt();
+        List<Edge> edges = new ArrayList<>();
+        int res_val = 0;
+        List<Edge> result = new ArrayList<>();
+
+        for (int i = 0; i < E; i++) {
+            int src = sc.nextInt();
+            int dest = sc.nextInt();
+            int weight = sc.nextInt();
+            edges.add(new Edge(src, dest, weight));
+        }
+
+        edges.sort(Comparator.comparingInt(edge -> edge.weight));// 按边的权值对边进行从小到大排序
+
+        UF uf = new UF(V);
+        // 从头开始遍历边
+        for (Edge edge : edges) {
+            // 并查集，搜出两个节点的祖先
+            int x = uf.find(edge.src);
+            int y = uf.find(edge.dest);
+
+            if (x != y) {// 如果祖先不同，则不在同一个集合
+                result.add(edge);
+                res_val += edge.weight; // 这条边可以作为生成树的边
+                uf.join(x,y); // 两个节点加入到同一个集合
+            }
+        }
+
+        System.out.println(res_val);
+
+        for (Edge edge : result) {
+            System.out.println(edge.src + " - " + edge.dest + " : " + edge.weight);
+        }
+
+
+    }
+
+}
+```
+
+
+
+```java
 public class Kruskal {
 
     public int minimumCost(int n, int[][] connections) {
@@ -5230,13 +5464,86 @@ public class Kruskal {
 
 ## 10.1.7 Dijkstra算法
 
+**解决单元最短路径(无负权值)问题**
+
 ### Dijkstra算法模板
+
+#### 1.朴素版O(n2)
+
+```java
+package base;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Dijkstra {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+
+        int[][] grid = new int[n + 1][n + 1];
+        for (int i = 0; i <= n; i++) {
+            Arrays.fill(grid[i], Integer.MAX_VALUE);
+        }
+
+        for (int i = 0; i < m; i++) {
+            int p1 = scanner.nextInt();
+            int p2 = scanner.nextInt();
+            int val = scanner.nextInt();
+            grid[p1][p2] = val;
+        }
+
+        int start = 1;
+        int end = n;
+
+        // 存储从源点到每个节点的最短距离
+        int[] minDist = new int[n + 1];
+        Arrays.fill(minDist, Integer.MAX_VALUE);
+
+        // 记录顶点是否被访问过
+        boolean[] visited = new boolean[n + 1];
+
+        minDist[start] = 0;  // 起始点到自身的距离为0
+
+        for (int i = 1; i <= n; i++) { // 遍历所有节点
+
+            int minVal = Integer.MAX_VALUE;
+            int cur = 1;
+
+            // 1、选距离源点最近且未访问过的节点
+            for (int v = 1; v <= n; ++v) {
+                if (!visited[v] && minDist[v] < minVal) {
+                    minVal = minDist[v];
+                    cur = v;
+                }
+            }
+
+            visited[cur] = true;  // 2、标记该节点已被访问
+
+            // 3、第三步，更新非访问节点到源点的距离（即更新minDist数组）
+            for (int v = 1; v <= n; v++) {
+                if (!visited[v] && grid[cur][v] != Integer.MAX_VALUE && minDist[cur] + grid[cur][v] < minDist[v]) {
+                    minDist[v] = minDist[cur] + grid[cur][v];
+                }
+            }
+        }
+
+        if (minDist[end] == Integer.MAX_VALUE) {
+            System.out.println(-1); // 不能到达终点
+        } else {
+            System.out.println(minDist[end]); // 到达终点最短路径
+        }
+    }
+}
+```
+
+#### 2. 堆优化版
 
 ```java
 public class Dijkstra {
     /**
      * Dijkstra 算法
-     * 根据labuladong修改，可能存在错误
      */
 
 
@@ -5300,6 +5607,331 @@ public class Dijkstra {
 
 }
 ```
+
+## 10.1.8 Bellman_ford算法
+
+### Bellman_ford算法模板
+
+**解决单元最短路径(可有负权值)问题**
+
+要求没有负权回路
+
+```java
+public class Bellman_ford {
+    static class Edge {
+        int src, dest, weight;
+        public Edge(int src, int dest, int weight) {
+            this.src = src;
+            this.dest = dest;
+            this.weight = weight;
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        List<Edge> grid = new ArrayList<>();
+
+        for (int i = 0; i < m; i++) {
+            int src = sc.nextInt();
+            int dest = sc.nextInt();
+            int weight = sc.nextInt();
+            grid.add(new Edge(src, dest, weight));
+        }
+
+        int start = 1;
+        int end = n;
+
+        int[] minDist = new int[n+1];
+        Arrays.fill(minDist, Integer.MAX_VALUE);
+        minDist[start] = 0;
+
+        for (int i = 1; i < n; i++) { // 对所有边 松弛 n-1 次
+            for (Edge edge : grid) { // 每一次松弛，都是对所有边进行松弛
+                int src = edge.src;
+                int dest = edge.dest;
+                int weight = edge.weight;
+                // 松弛操作
+                // minDist[from] != INT_MAX 防止从未计算过的节点出发
+                if (minDist[src] != Integer.MAX_VALUE && minDist[dest] > minDist[src] + weight) {
+                    minDist[dest] = minDist[src] + weight;
+                }
+            }
+        }
+        if (minDist[end] == Integer.MAX_VALUE) {
+            System.out.println("unconnected");
+        } else {
+            System.out.println(minDist[end]);
+        }
+
+
+    }
+}
+```
+
+### 优化后的SPFA算法
+
+**只需要对 上一次松弛的时候更新过的节点作为出发节点所连接的边 进行松弛就够了**。
+
+基于以上思路，如何记录 上次松弛的时候更新过的节点呢？
+
+用队列来记录。
+
+```java
+public class SPFA {
+    static class Edge {
+        int to;
+        int val;
+        public Edge(int to, int val) {
+            this.to = to;
+            this.val = val;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        List<List<Edge>> graph = new ArrayList<>(n+1);
+        for (int i = 0; i <= n; i++) {
+            graph.add(new ArrayList<Edge>());
+        }
+        for (int i = 0; i < m; i++) {
+            int form = sc.nextInt();
+            int to = sc.nextInt();
+            int val = sc.nextInt();
+            graph.get(form).add(new Edge(to, val));
+        }
+
+        int start = 1;
+        int end = n;
+
+        int[] minDist = new int[n+1];
+        Arrays.fill(minDist, Integer.MAX_VALUE);
+        minDist[start] = 0;
+
+        Deque<Integer> queue = new LinkedList<>();
+        queue.add(start);
+
+        while (!queue.isEmpty()) {
+            int cur = queue.poll();
+
+            for (Edge edge : graph.get(cur)) {
+                int from = cur;
+                int to = edge.to;
+                int val = edge.val;
+                if (minDist[to] > minDist[from] + val) {
+                    minDist[to] = minDist[from] + val;
+                    queue.add(to);
+                }
+            }
+        }
+
+        if (minDist[end] == Integer.MAX_VALUE) System.out.println("unconnected");
+        else System.out.println(minDist[end]);
+
+    }
+}
+```
+
+### Bellman_ford判断负权回路
+
+在 bellman_ford 算法中，松弛 n-1 次所有的边 就可以求得 起点到任何节点的最短路径，松弛 n 次以上，minDist数组（记录起到到其他节点的最短距离）中的结果也不会有改变
+
+```java
+public class Bellman_ford_isCycle {
+    static class Edge {
+        int src, dest, weight;
+        public Edge(int src, int dest, int weight) {
+            this.src = src;
+            this.dest = dest;
+            this.weight = weight;
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        List<Edge> grid = new ArrayList<>();
+
+        for (int i = 0; i < m; i++) {
+            int src = sc.nextInt();
+            int dest = sc.nextInt();
+            int weight = sc.nextInt();
+            grid.add(new Edge(src, dest, weight));
+        }
+
+        int start = 1;
+        int end = n;
+
+        int[] minDist = new int[n+1];
+        Arrays.fill(minDist, Integer.MAX_VALUE);
+        minDist[start] = 0;
+        boolean flag = false;
+
+        for (int i = 1; i <= n; i++) { // 对所有边 松弛 n-1 次
+            for (Edge edge : grid) { // 每一次松弛，都是对所有边进行松弛
+                int src = edge.src;
+                int dest = edge.dest;
+                int weight = edge.weight;
+                // 松弛操作
+                // minDist[from] != INT_MAX 防止从未计算过的节点出发
+                if (i < n) {
+                    if (minDist[src] != Integer.MAX_VALUE && minDist[dest] > minDist[src] + weight) {
+                        minDist[dest] = minDist[src] + weight;
+                    }
+                } else { // 多加一次松弛判断负权回路
+                    if (minDist[src] != Integer.MAX_VALUE && minDist[dest] > minDist[src] + weight) flag = true;
+                }
+
+            }
+        }
+
+        if (flag) System.out.println("has negative cycle");
+
+        if (minDist[end] == Integer.MAX_VALUE) {
+            System.out.println("unconnected");
+        } else {
+            System.out.println(minDist[end]);
+        }
+
+
+    }
+}
+```
+
+### Bellman_ford之单源有限最短路
+
+**起点最多经过k + 1 条边到达终点的最短距离。**
+
+对所有边松弛一次，相当于计算 起点到达 与起点一条边相连的节点 的最短距离，那么对所有边松弛 k + 1次，就是求 起点到达 与起点k + 1条边相连的节点的 最短距离。
+
+```java
+public class Bellman_ford_limit {
+    static class Edge {
+        int src, dest, weight;
+        public Edge(int src, int dest, int weight) {
+            this.src = src;
+            this.dest = dest;
+            this.weight = weight;
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        List<Edge> grid = new ArrayList<>();
+
+        for (int i = 0; i < m; i++) {
+            int src = sc.nextInt();
+            int dest = sc.nextInt();
+            int weight = sc.nextInt();
+            grid.add(new Edge(src, dest, weight));
+        }
+
+        int start = sc.nextInt();
+        int end = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[] minDist = new int[n+1];
+        Arrays.fill(minDist, Integer.MAX_VALUE);
+        minDist[start] = 0;
+
+        for (int i = 1; i <= k+1; i++) { // 对所有边 松弛 k+1 次
+            for (Edge edge : grid) { // 每一次松弛，都是对所有边进行松弛
+                int src = edge.src;
+                int dest = edge.dest;
+                int weight = edge.weight;
+                // 松弛操作
+                // minDist[from] != INT_MAX 防止从未计算过的节点出发
+                if (minDist[src] != Integer.MAX_VALUE && minDist[dest] > minDist[src] + weight) {
+                    minDist[dest] = minDist[src] + weight;
+                }
+            }
+        }
+        if (minDist[end] == Integer.MAX_VALUE) {
+            System.out.println("unconnected");
+        } else {
+            System.out.println(minDist[end]);
+        }
+
+
+    }
+}
+```
+
+## 10.1.9 Floyd算法
+
+**多源最短路问题**
+
+**Floyd 算法对边的权值正负没有要求，都可以处理**。
+
+```java
+public class Floyd {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+
+        int[][] graph = new int[n+1][n+1];
+        for (int i = 0; i <= n; i++) {
+            Arrays.fill(graph[i], 10005);
+        }
+
+        for (int i = 0; i < m; i++) {
+            int from = scanner.nextInt();
+            int to = scanner.nextInt();
+            int weight = scanner.nextInt();
+            graph[from][to] = weight;
+            graph[to][from] = weight;
+        }
+        
+        // 开始 floyd
+        for (int k = 1; k <= n; k++) {
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= n; j++) {
+                    graph[i][j] = Math.min(graph[i][j], graph[i][k] + graph[k][j]);
+                }
+            }
+        }
+
+        int num = scanner.nextInt();
+        while (num-- > 0) {
+            int start = scanner.nextInt();
+            int end = scanner.nextInt();
+            if (graph[start][end] == 10005) System.out.println(-1);
+            else System.out.println(graph[start][end]);
+        }
+
+    }
+}
+```
+
+## 10.1.10 最短路问题总结
+
+![](D:\Code\JavaProject\leetcode2024\leetcode2024.assets\Snipaste_2024-07-31_15-03-15.png)
+
+### 场景选择：
+
+**如果遇到单源且边为正数，直接Dijkstra**。
+
+至于 **使用朴素版还是 堆优化版 还是取决于图的稠密度**， 多少节点多少边算是稠密图，多少算是稀疏图，这个没有量化，如果想量化只能写出两个版本然后做实验去测试，不同的判题机得出的结果还不太一样。
+
+一般情况下，可以直接用堆优化版本。
+
+**如果遇到单源边可为负数，直接 Bellman-Ford**，同样 SPFA 还是 Bellman-Ford 取决于图的稠密度。
+
+一般情况下，直接用 SPFA。
+
+**如果有负权回路，优先 Bellman-Ford**， 如果是有限节点最短路 也优先 Bellman-Ford，理由是写代码比较方便。
+
+**如果是遇到多源点求最短路，直接 Floyd**。
+
+除非 源点特别少，且边都是正数，那可以 多次 Dijkstra 求出最短路径，但这种情况很少，一般出现多个源点了，就是想让你用 Floyd 了。
 
 
 
@@ -5979,14 +6611,14 @@ if (traversal(root) == 0) {
  * 2：本节点有覆盖
  */
 int ans = 0;
-public int minCameraCover(TreeNode root) {
+public int minCameraCover(utils.TreeNode root) {
     if (root == null) return 0;
     if (traversal(root) == 0) {
         ans++;
     }
     return ans;
 }
-private int traversal(TreeNode node) {
+private int traversal(utils.TreeNode node) {
     if (node == null) return 2;
     int left = traversal(node.left);
     int right = traversal(node.right);
@@ -6649,7 +7281,7 @@ super(capacity,0.75f,true);
 
 ```java
 int res = 1;  //表示参与的节点数
-public int diameterOfBinaryTree(TreeNode root) {
+public int diameterOfBinaryTree(utils.TreeNode root) {
     if (root == null) return 0;
     traversal(root);
     return res - 1;
@@ -6662,7 +7294,7 @@ public int diameterOfBinaryTree(TreeNode root) {
  * @param root
  * @return
  */
-private int traversal(TreeNode root) {
+private int traversal(utils.TreeNode root) {
     if (root == null) return 0;
 
     int left = traversal(root.left);
@@ -6680,7 +7312,7 @@ private int traversal(TreeNode root) {
 
 ```java
 int max = Integer.MIN_VALUE;
-public int maxPathSum(TreeNode root) {
+public int maxPathSum(utils.TreeNode root) {
     if (root == null) return 0;
     traversal(root);
     return max;
@@ -6694,7 +7326,7 @@ public int maxPathSum(TreeNode root) {
  * @param node
  * @return
  */
-private int traversal(TreeNode node) {
+private int traversal(utils.TreeNode node) {
     if(node == null) return 0;
 
 
@@ -6716,12 +7348,12 @@ private int traversal(TreeNode node) {
  * 之后处理下一个节点
  * @param root
  */
-public void flatten(TreeNode root) {
+public void flatten(utils.TreeNode root) {
     while (root != null) {
         if (root.left == null) {
             root = root.right;
         } else {
-            TreeNode pre = root.left;
+            utils.TreeNode pre = root.left;
             while (pre.right != null) {
                 pre = pre.right;
             }
@@ -6740,7 +7372,7 @@ public void flatten(TreeNode root) {
 方法一：前序遍历，要把每个节点作为根节点都计算到
 
 ```java
-public int pathSum(TreeNode root, int targetSum) {
+public int pathSum(utils.TreeNode root, int targetSum) {
     if (root == null) return 0;
     long target = (long) targetSum;
     int ans = traversal(root,target);
@@ -6749,7 +7381,7 @@ public int pathSum(TreeNode root, int targetSum) {
     return ans;
 }
 
-private int traversal(TreeNode node, long targetSum) {
+private int traversal(utils.TreeNode node, long targetSum) {
     int sum = 0;
 
     if (node == null) return 0;
@@ -6779,13 +7411,13 @@ HashMap里存的key是前缀和， value是该前缀和的节点数量，记录�
  * @param targetSum
  * @return
  */
-public int pathSum2(TreeNode root, int targetSum) {
+public int pathSum2(utils.TreeNode root, int targetSum) {
     Map<Long, Integer> occurance = new HashMap<>();
     occurance.put(0L, 1);
     return dfs(root, targetSum, 0, occurance);
 }
 
-private int dfs(TreeNode root, int targetSum, long sumToNow, Map<Long, Integer> occurance) {
+private int dfs(utils.TreeNode root, int targetSum, long sumToNow, Map<Long, Integer> occurance) {
     if (root == null) {
         return 0;
     }
@@ -7681,12 +8313,12 @@ public void setZeroes(int[][] matrix) {
 public class middle230 {
     int len = 0;
     int ans = -1;
-    public int kthSmallest(TreeNode root, int k) {
+    public int kthSmallest(utils.TreeNode root, int k) {
         traversal(root,k);
         return ans;
     }
 
-    private void traversal(TreeNode root,int k) {
+    private void traversal(utils.TreeNode root,int k) {
         if (root == null) return;
 
         traversal(root.left,k);
@@ -7701,22 +8333,22 @@ public class middle230 {
     }
 
 
-    public int kthSmallest2(TreeNode root, int k) {
+    public int kthSmallest2(utils.TreeNode root, int k) {
         MyBst bst = new MyBst(root);
         return bst.kthSmallest(k);
     }
 
     class MyBst{
-        TreeNode root;
-        HashMap<TreeNode,Integer> map;
+        utils.TreeNode root;
+        HashMap<utils.TreeNode,Integer> map;
 
-        public MyBst(TreeNode root) {
+        public MyBst(utils.TreeNode root) {
             this.root = root;
             this.map = new HashMap<>();
             countNodeNum(root);
         }
 
-        private int countNodeNum(TreeNode node) {
+        private int countNodeNum(utils.TreeNode node) {
             if (root == null) return 0;
             int left = countNodeNum(node.left);
             int right = countNodeNum(node.right);
@@ -7726,7 +8358,7 @@ public class middle230 {
 
         // 返回二叉搜索树中第k小的元素
         public int kthSmallest(int k) {
-            TreeNode node = root;
+            utils.TreeNode node = root;
             while (node != null) {
                 int left = getNodeNum(node.left);
                 if (left < k-1) {
@@ -7741,7 +8373,7 @@ public class middle230 {
             return node.val;
         }
 
-        private int getNodeNum(TreeNode node) {
+        private int getNodeNum(utils.TreeNode node) {
             return map.getOrDefault(node,0);
         }
     }
