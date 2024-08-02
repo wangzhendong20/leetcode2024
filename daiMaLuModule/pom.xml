@@ -22,6 +22,7 @@
         <module>GraphCodeModule</module>
         <module>GreedyCodeModule</module>
         <module>DPCodeModule</module>
+        <module>HotCodeModule</module>
     </modules>
 
     <properties>
