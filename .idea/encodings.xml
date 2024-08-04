@@ -3,6 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Array/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Array/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DailyCodeModule/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DailyCodeModule/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Hot100Plus/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Hot100Plus/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/MultiThreadModule/src/main/java" charset="UTF-8" />
@@ -43,14 +45,28 @@
     <file url="file://$PROJECT_DIR$/daiMaCodeModule/test/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/daiMaLuModule/ArrayCodeModule/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/daiMaLuModule/ArrayCodeModule/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/BacktrackCodeModule/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/BacktrackCodeModule/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/DPCodeModule/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/DPCodeModule/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/GraphCodeModule/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/GraphCodeModule/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/GreedyCodeModule/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/GreedyCodeModule/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/daiMaLuModule/HashCodeModule/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/daiMaLuModule/HashCodeModule/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/HotCodeModule/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/HotCodeModule/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/daiMaLuModule/LinkedListCodeModule/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/daiMaLuModule/LinkedListCodeModule/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/OtherCodeModule/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/OtherCodeModule/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/daiMaLuModule/StackAndQueueCodeModule/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/daiMaLuModule/StackAndQueueCodeModule/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/daiMaLuModule/StringCodeModule/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/daiMaLuModule/StringCodeModule/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/TreeCodeModule/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/daiMaLuModule/TreeCodeModule/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/daiMaLuModule/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/daiMaLuModule/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/demoBiShi/src/main/java" charset="UTF-8" />
