@@ -5143,7 +5143,201 @@ public int[] findOrderBFS(int numCourses, int[][] prerequisites) {
 
 ## 10.1.5 二分图
 
+*此部分来源于https://leetcode.cn/problems/is-graph-bipartite/solutions/333138/bfs-dfs-bing-cha-ji-san-chong-fang-fa-pan-duan-er-/*
 
+### 一、什么是二分图
+
+若无向图 G=(V,E) 的顶点集 V 可以分割为两个互不相交的子集，且图中每条边的两个顶点分别属于
+不同的子集，则称图 G 为一个二分图。
+
+### 二、判断二分图
+#### 1、深度优先搜索 / 广度优先搜索
+
+我们使用图搜索算法从各个连通域的任一顶点开始遍历整个连通域，遍历的过程中用两种不同的颜色对顶点进行染色，相邻顶点染成相反的颜色。这个过程中倘若发现相邻的顶点被染成了相同的颜色，说明它不是二分图；反之，如果所有的连通域都染色成功，说明它是二分图。
+
+#### 2、并查集
+
+我们知道如果是二分图的话，那么图中每个顶点的所有邻接点都应该属于同一集合，且不与顶点处于同一集合。因此我们可以使用并查集来解决这个问题，我们遍历图中每个顶点，将当前顶点的所有邻接点进行合并，并判断这些邻接点中是否存在某一邻接点已经和当前顶点处于同一个集合中了，若是，则说明不是二分图。
+
+### 二分图模板
+
+#### [785. 判断二分图](https://leetcode.cn/problems/is-graph-bipartite/)
+
+```java
+public class middle785 {
+    class UF {
+        int[] parent;
+
+        public UF(int n) {
+            parent = new int[n];
+            for (int i = 0; i < n; i++) {
+                parent[i] = i;
+            }
+        }
+
+        public int find(int x) {
+            if (x == parent[x]) return x;
+            else return parent[x] = find(parent[x]);
+        }
+
+        public boolean isSame(int x, int y) {
+            return find(x) == find(y);
+        }
+
+        public void join(int x, int y) {
+            x = find(x);
+            y = find(y);
+            if (x == y) return;
+            parent[y] = x;
+        }
+
+    }
+
+    /**
+     * 并查集
+     * 我们知道如果是二分图的话，那么图中每个顶点的所有邻接点都应该属于同一集合，且不与顶点处于同一集合。
+     * 因此我们可以使用并查集来解决这个问题，
+     * 我们遍历图中每个顶点，将当前顶点的所有邻接点进行合并，并判断这些邻接点中是否存在某一邻接点已经和当前顶点处于同一个集合中了，
+     * 若是，则说明不是二分图。
+     * @param graph
+     * @return
+     */
+    public boolean isBipartite(int[][] graph) {
+        UF uf = new UF(graph.length);
+
+        // 遍历每个顶点，将当前顶点的所有邻接点进行合并
+        for (int i = 0; i < graph.length; i++) {
+            int[] adjs = graph[i];
+            for (int adj : adjs) {
+                // 若某个邻接点与当前顶点已经在一个集合中了，说明不是二分图，返回 false。
+                if (uf.isSame(i, adj)) {
+                    return false;
+                }
+                uf.join(adjs[0], adj);
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * DFS
+     * 我们使用图搜索算法从各个连通域的任一顶点开始遍历整个连通域，遍历的过程中用两种不同的颜色对顶点进行染色，相邻顶点染成相反的颜色。
+     * 这个过程中倘若发现相邻的顶点被染成了相同的颜色，说明它不是二分图；反之，如果所有的连通域都染色成功，说明它是二分图。
+     * @param graph
+     * @return
+     */
+    public boolean isBipartite2(int[][] graph) {
+        // 定义 visited 数组，初始值为 0 表示未被访问，赋值为 1 或者 -1 表示两种不同的颜色。
+        int[] visited = new int[graph.length];
+        for (int i = 0; i < graph.length; i++) {
+            if (visited[i] == 0 && !dfs(graph, visited, i, 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean dfs(int[][] graph, int[] visited, int u, int color) {
+        // 如果要对某顶点染色时，发现它已经被染色了，则判断它的颜色是否与本次要染的颜色相同，如果矛盾，说明此无向图无法被正确染色，返回 false。
+        if (visited[u] != 0) {
+            return visited[u] == color;
+        }
+
+        // 对当前顶点进行染色，并将当前顶点的所有邻接点染成相反的颜色。
+        visited[u] = color;
+        for (int w : graph[u]) {
+            if (!dfs(graph,visited,w,color)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * BFS
+     * @param graph
+     * @return
+     */
+    public boolean isBipartite3(int[][] graph) {
+        // 定义 visited 数组，初始值为 0 表示未被访问，赋值为 1 或者 -1 表示两种不同的颜色。
+        int[] visited = new int[graph.length];
+        Deque<Integer> queue = new LinkedList<>();
+        // 因为图中可能含有多个连通域，所以我们需要判断是否存在顶点未被访问，若存在则从它开始再进行一轮 bfs 染色。
+        for (int i = 0; i < graph.length; i++) {
+            if (visited[i] != 0) {
+                continue;
+            }
+            // 每出队一个顶点，将其所有邻接点染成相反的颜色并入队。
+            queue.offer(i);
+            visited[i] = 1;
+            while (!queue.isEmpty()) {
+                int v = queue.poll();
+                for (int w : graph[v]) {
+                    // 如果当前顶点的某个邻接点已经被染过色了，且颜色和当前顶点相同，说明此无向图无法被正确染色，返回 false。
+                    if (visited[w] == visited[v]) {
+                        return false;
+                    }
+                    if (visited[w] == 0) {
+                        visited[w] = -visited[v];
+                        queue.offer(w);
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+}
+```
+
+#### [886. 可能的二分法](https://leetcode.cn/problems/possible-bipartition/)
+
+```java
+/**
+     * BFS
+     * @param n
+     * @param dislikes
+     * @return
+     */
+public boolean possibleBipartition(int n, int[][] dislikes) {
+    int[] visited = new int[n+1];
+    Deque<Integer> deque = new LinkedList<>();
+    List<Integer>[] graph = new ArrayList[n+1];
+    for (int i = 0; i <= n; i++) {
+        graph[i] =  new ArrayList<>();
+    }
+
+    for (int[] dislike : dislikes) {
+        int u = dislike[0];
+        int v = dislike[1];
+        graph[u].add(v);
+        graph[v].add(u);
+    }
+
+    for (int i = 1; i < graph.length; i++) {
+        if (visited[i] != 0) {
+            continue;
+        }
+        deque.offer(i);
+        visited[i] = 1;
+        while (!deque.isEmpty()) {
+            int v = deque.poll();
+            for (int w : graph[v]) {
+                if (visited[w] == visited[v]) {
+                    return false;
+                }
+                if (visited[w] == 0) {
+                    visited[w] = -visited[v];
+                    deque.offer(w);
+                }
+            }
+        }
+    }
+
+    return true;
+}
+```
 
 ## 10.1.6 Pirm算法和Kruskal算法
 
@@ -5811,54 +6005,29 @@ public class Bellman_ford_isCycle {
 
 ```java
 public class Bellman_ford_limit {
-    static class Edge {
-        int src, dest, weight;
-        public Edge(int src, int dest, int weight) {
-            this.src = src;
-            this.dest = dest;
-            this.weight = weight;
-        }
-    }
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
 
-        List<Edge> grid = new ArrayList<>();
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        int[] misDist = new int[n];
+        Arrays.fill(misDist,Integer.MAX_VALUE);
+        misDist[src] = 0;
 
-        for (int i = 0; i < m; i++) {
-            int src = sc.nextInt();
-            int dest = sc.nextInt();
-            int weight = sc.nextInt();
-            grid.add(new Edge(src, dest, weight));
-        }
-
-        int start = sc.nextInt();
-        int end = sc.nextInt();
-        int k = sc.nextInt();
-
-        int[] minDist = new int[n+1];
-        Arrays.fill(minDist, Integer.MAX_VALUE);
-        minDist[start] = 0;
-
-        for (int i = 1; i <= k+1; i++) { // 对所有边 松弛 k+1 次
-            for (Edge edge : grid) { // 每一次松弛，都是对所有边进行松弛
-                int src = edge.src;
-                int dest = edge.dest;
-                int weight = edge.weight;
-                // 松弛操作
-                // minDist[from] != INT_MAX 防止从未计算过的节点出发
-                if (minDist[src] != Integer.MAX_VALUE && minDist[dest] > minDist[src] + weight) {
-                    minDist[dest] = minDist[src] + weight;
+        for (int i = 1; i <= k+1; i++) {
+            int[] misDist_copy = misDist.clone(); // 获取上一次计算的结果
+            for (int[] flight : flights) {
+                int start = flight[0], end = flight[1];
+                int price = flight[2];
+                // 注意使用 minDist_copy 来计算 minDist
+                if (misDist_copy[start] != Integer.MAX_VALUE && misDist[end] > misDist_copy[start] + price) {
+                    misDist[end] = misDist_copy[start] + price;
                 }
             }
         }
-        if (minDist[end] == Integer.MAX_VALUE) {
-            System.out.println("unconnected");
-        } else {
-            System.out.println(minDist[end]);
-        }
 
+        if (misDist[dst] == Integer.MAX_VALUE) {
+            return -1;
+        } else {
+            return misDist[dst];
+        }
 
     }
 }
@@ -8377,4 +8546,227 @@ public class middle230 {
             return map.getOrDefault(node,0);
         }
     }
+```
+
+## [3.无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
+
+将字符串放入HashMap中，当遇到重复字符时，将左边界向右移动，直到重复字符不再出现，记录当前子串的长度，并更新最大长度
+
+```java
+public int lengthOfLongestSubstring(String s) {
+        if (s.length() == 0) return 0;
+        HashMap<Character,Integer> map = new HashMap<>();
+
+        int left = 0;
+        int maxLen = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char c = s.charAt(right);
+            while (map.containsKey(c)) {
+                map.remove(s.charAt(left));
+                left++;
+            }
+
+            map.put(c, map.getOrDefault(c,0) + 1);
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+
+```
+
+## [4. 寻找两个正序数组的中位数](https://leetcode.cn/problems/median-of-two-sorted-arrays/)
+
+求两个有序数组的中位数 -> 求第k小的数
+
+核心思想是每次排除k/2个数
+
+```java
+/**
+     * 求两个有序数组的中位数 -> 求第k小的数
+     * 核心思想是每次排除k/2个数
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n = nums1.length;
+        int m = nums2.length;
+        int left = (n + m + 1) / 2;
+        int right = (n + m + 2) / 2;
+        // 奇数时，取中间值；偶数时，取中间两个数的平均值;
+        // 将奇数和偶数的情况合并处理，奇数时的k是相同的;
+        // 例如 n = 1, m = 2, 那么left = 2, right = 2; 而 n=2,m=2,那么 left = 2, right = 3;
+        return (getKth(nums1,0,n-1,nums2,0,m-1,left) + getKth(nums1,0,n-1,nums2,0,m-1,right)) * 0.5;
+    }
+
+
+    private int getKth(int[] nums1, int start1, int end1, int[] nums2, int start2, int end2, int k) {
+        int len1 = end1 - start1 + 1;
+        int len2 = end2 - start2 + 1;
+        if (len1 > len2) { //让 len1 的长度小于 len2，这样就能保证如果有数组空了，一定是 len1
+            return getKth(nums2, start2, end2, nums1, start1, end1, k);
+        }
+        if (len1 == 0) return nums2[start2 + k - 1];  // len1空了，那直接从nums2里选
+        if (k == 1) return Math.min(nums1[start1], nums2[start2]);  //k=1的时候取小的那个数
+
+        // 每次排除 k/2 个数，然后递归查找
+        int i = start1 + Math.min(len1, k/2) - 1;
+        int j = start2 + Math.min(len2, k/2) - 1;
+
+        if (nums1[i] > nums2[j]) { // 选大的那个，把小的那个数组里的前面的数排除掉
+            return getKth(nums1, start1, end1, nums2, j+1, end2 , k - (j - start2 + 1));
+        } else {
+            return getKth(nums1, i+1, end1, nums2, start2, end2, k - (i - start1 + 1));
+        }
+
+    }
+
+
+    /**
+     * 通过不合并两个数组求中位数的方法
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public double findMedianSortedArrays2(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        
+        int len = m + n;
+        
+        int left = -1, right = -1;
+        int aStart = 0, bStart = 0;
+
+        for (int i = 0; i < len / 2; i++) {
+            left = right;
+            if (aStart < m && (bStart >= n || nums1[aStart] < nums2[bStart])) {
+                right = nums1[aStart++];
+            } else {
+                right = nums2[bStart++];
+            }
+        }
+        
+        if (len % 2 == 0) {
+            return (left + right) / 2.0;
+        } else {
+            return right;
+        }
+        
+    }
+```
+
+## [347. 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/) (ac)
+
+```java
+/**
+     * 哈希表+桶排序
+     * 首先使用哈希表统计频率，统计完成后，创建一个数组，将频率作为数组下标，对于出现频率不同的数字集合，存入对应的数组下标即可。
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+        }
+
+        List<Integer>[] bucket = new List[nums.length+1];
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            int freq = entry.getValue();
+            if (bucket[freq] == null) {
+                bucket[freq] = new ArrayList<>();
+            }
+            bucket[freq].add(entry.getKey());
+        }
+
+        int[] ans = new int[k];
+        int index = 0;
+        for (int i = bucket.length-1; i >= 0 && k > 0; i--) {
+            if (bucket[i] == null) continue;
+            for (Integer integer : bucket[i]) {
+                ans[index++] = integer;
+                k--;
+            }
+        }
+
+        return ans;
+    }
+
+    /**
+     * 哈希表+大根堆
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int[] topKFrequent2(int[] nums, int k) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o2[1] - o1[1];
+            }
+        });
+
+        map.entrySet().stream().forEach(entry -> {
+            pq.offer(new int[]{entry.getKey(),entry.getValue()});
+        });
+
+        int[] res = new int[k];
+        for (int i = 0; i < k; i++) {
+            res[i] = pq.poll()[0];
+        }
+
+        return res;
+    }
+```
+
+## [279. 完全平方数](https://leetcode.cn/problems/perfect-squares/)
+
+*完全背包问题* 
+
+```java
+public int numSquares(int n) {
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 1; i <= n/2; i++) {  // 物品
+            for (int j = i*i; j <= n; j++) {  //背包
+                if (dp[j - i*i] != Integer.MAX_VALUE) {
+                    dp[j] = Math.min(dp[j], dp[j-i*i] + 1);
+                }
+            }
+        }
+
+        return dp[n];
+    }
+```
+
+## [139. 单词拆分](https://leetcode.cn/problems/word-break/)
+
+*完全背包问题* 
+
+```java
+public boolean wordBreak(String s, List<String> wordDict) {
+    HashSet<String> set = new HashSet<>(wordDict);
+    boolean[] dp = new boolean[s.length() + 1];
+    dp[0] = true;
+    // 排列数
+    for (int i = 1; i <= s.length(); i++) {  // 背包
+        for (int j = 0; j < i; j++) {  //物品
+            String sub = s.substring(j,i);
+            if (dp[j] && set.contains(sub)) {
+                dp[i] = true;
+            }
+        }
+    }
+    return dp[s.length()];
+}
 ```

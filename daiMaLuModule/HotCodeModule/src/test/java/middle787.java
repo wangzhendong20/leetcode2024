@@ -1,9 +1,17 @@
-package base;
-
 import java.util.Arrays;
 
-public class Bellman_ford_limit {
+public class middle787 {
 
+    /**
+     * Bellman_ford之单源有限最短路
+     * 模板题
+     * @param n
+     * @param flights
+     * @param src
+     * @param dst
+     * @param k
+     * @return
+     */
     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
         int[] misDist = new int[n];
         Arrays.fill(misDist,Integer.MAX_VALUE);
