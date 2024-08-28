@@ -21,6 +21,7 @@ public class KM106 {
                     for (int k = 0; k < 4; k++) {
                         int x = i + dir[k][0];
                         int y = j + dir[k][1];
+                        // 遇到边界或者水，周长加一
                         if (x < 0 || x >= n || y < 0 || y >= m || graph[x][y] == 0) {
                             count++;
                         }
